@@ -1,15 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHouse,
-  faUserGroup,
-  faBriefcase,
-  faCommentDots,
-  faBell,
-  faMagnifyingGlass,
-  faGrip,
-  faBullhorn,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const Header = () => {
   return (
@@ -40,55 +32,7 @@ const Header = () => {
             </div>
           </form>
         </span>
-
-        <nav className='flex justify-evenly text-gray-500 items-center'>
-          <div className='flex flex-col mr-10'>
-            <Link>
-              <FontAwesomeIcon className='text-xl ' icon={faHouse} />
-              <label className='text-xs'>Home</label>
-            </Link>
-          </div>
-          <div className='flex flex-col mr-10'>
-            <Link>
-              <FontAwesomeIcon className='text-xl' icon={faUserGroup} />
-              <label className='text-xs'>Rete</label>
-            </Link>
-          </div>
-          <div className='flex flex-col mr-10'>
-            <Link>
-              <FontAwesomeIcon className='text-xl' icon={faBriefcase} />
-              <label className='text-xs'>Lavoro</label>
-            </Link>
-          </div>
-
-          <div className='flex flex-col mr-10'>
-            <Link>
-              <FontAwesomeIcon className='text-xl' icon={faCommentDots} />
-              <label className='text-xs'>Messaggistica</label>
-            </Link>
-          </div>
-          <div className='flex flex-col mr-10'>
-            <Link>
-              <FontAwesomeIcon className='text-xl' icon={faBell} />
-              <label className='text-xs'>Notifiche</label>
-            </Link>
-          </div>
-          <div className='flex flex-col mr-10'>
-            <img className='w-5 rounded-full' src='' alt='Profile image' />
-            <label className='text-xs'>Tu</label>
-          </div>
-
-          <div className='flex flex-col border-l border-gray-400 h-full mr-8 pl-5'>
-            <FontAwesomeIcon className='text-xl' icon={faGrip} />
-            <label className='text-xs'>Per le aziende</label>
-          </div>
-          <div className='flex flex-col'>
-            <Link>
-              <FontAwesomeIcon className='text-xl' icon={faBullhorn} />
-              <label className='text-xs'>Offerta di lavoro gratuita</label>
-            </Link>
-          </div>
-        </nav>
+        <Navbar></Navbar>
       </div>
     </header>
   );
