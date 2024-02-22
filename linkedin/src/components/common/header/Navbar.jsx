@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav className='flex justify-evenly text-gray-500 items-center'>
-      <Link>
+      <Link to='/'>
         <div className='flex flex-col mr-10 ml-10 text-center hover:text-gray-900'>
           <FontAwesomeIcon className='text-xl mb-1' icon={faHouse} />
           <p className='text-xs'>Home</p>
@@ -27,7 +27,7 @@ const Navbar = () => {
         </div>
       </Link>
       <Link>
-        <div className='flex flex-col mr-10 text-center  hover:text-gray-900'>
+        <div className='flex flex-col mr-10 text-center hover:text-gray-900'>
           <FontAwesomeIcon className='text-xl mb-1' icon={faBriefcase} />
           <p className='text-xs'>Lavoro</p>
         </div>

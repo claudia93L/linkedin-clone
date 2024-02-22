@@ -1,6 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/common/header/Header';
+import Homepage from './pages/Homepage';
+import Profile from './pages/Profile';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 function App() {
   // token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ3NWE3Zjc2YTY0YjAwMTllZjFhZDQiLCJpYXQiOjE3MDg2MTIyMjMsImV4cCI6MTcwOTgyMTgyM30.PO5wrMuUFkxCnf42llGj-y6i4rZwTeeht1nzaqZ_CcM
@@ -29,12 +33,17 @@ function App() {
   // <FontAwesomeIcon icon={faCommentDots}  />
   // <FontAwesomeIcon icon={faImage}  />
   return (
-    <div className='px-32'>
-      <Header></Header>
-      <Routes>
-        <Route></Route>
-      </Routes>
-    </div>
+    <>
+      <Provider store={store}>
+        <Header></Header>
+        <div className='px-32 bg-stone-100 my-6'>
+          <Routes>
+            <Route path='/' element={<Homepage></Homepage>}></Route>
+            <Route path='/profile' element={<Profile></Profile>}></Route>
+          </Routes>
+        </div>
+      </Provider>
+    </>
   );
 }
 
