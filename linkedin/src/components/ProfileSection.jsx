@@ -36,7 +36,7 @@ const ProfileSection = () => {
 
   return (
     <div>
-      <img src={userData.image} alt='' />
+      <img src={userData.image} alt='' className='rounded-full w-40' />
       <h1>
         {userData.name} {userData.surname}
       </h1>
