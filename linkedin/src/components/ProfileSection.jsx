@@ -39,7 +39,7 @@ const ProfileSection = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <div className='relative'>
         <div className='px-2 py-1 bg-white rounded-full absolute right-0 m-5 cursor-pointer text-blue-600 hover:text-black'>
           <FontAwesomeIcon icon={faPencil} />
@@ -52,12 +52,12 @@ const ProfileSection = () => {
         />
         <img
           src={userData.image}
-          alt=''
-          className='rounded-full w-40 mx-5 absolute top-48 border-4 border-white cursor-pointer'
+          alt='Profile Image'
+          className='rounded-full w-40 mx-5 absolute top-28 border-4 border-white cursor-pointer'
         />
       </div>
 
-      <div className='mx-5 my-16'>
+      <div className='mx-5 mt-16 mb-5'>
         <h1 className='text-2xl font-bold'>
           {userData.name} {userData.surname}
           <span className='font-thin text-sm mx-2'>(Lui)</span>
@@ -98,7 +98,7 @@ const ProfileSection = () => {
           ></Card>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

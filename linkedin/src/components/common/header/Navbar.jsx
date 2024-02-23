@@ -18,36 +18,36 @@ const Navbar = () => {
   return (
     <nav className='flex justify-evenly text-gray-500 items-center'>
       <Link to='/'>
-        <div className='flex flex-col mr-10 ml-10 text-center hover:text-gray-900'>
+        <div className='flex flex-col mr-8 ml-10 text-center hover:text-gray-900'>
           <FontAwesomeIcon className='text-xl mb-1' icon={faHouse} />
           <p className='text-xs'>Home</p>
         </div>
       </Link>
       <Link>
-        <div className='flex flex-col mr-10 text-center  hover:text-gray-900'>
+        <div className='flex flex-col mr-8 text-center  hover:text-gray-900'>
           <FontAwesomeIcon className='text-xl mb-1' icon={faUserGroup} />
           <p className='text-xs'>Rete</p>
         </div>
       </Link>
       <Link>
-        <div className='flex flex-col mr-10 text-center hover:text-gray-900'>
+        <div className='flex flex-col mr-6 text-center hover:text-gray-900'>
           <FontAwesomeIcon className='text-xl mb-1' icon={faBriefcase} />
           <p className='text-xs'>Lavoro</p>
         </div>
       </Link>
       <Link>
-        <div className='flex flex-col mr-10 text-center  hover:text-gray-900'>
+        <div className='flex flex-col mr-6 text-center  hover:text-gray-900'>
           <FontAwesomeIcon className='text-xl mb-1' icon={faCommentDots} />
           <p className='text-xs'>Messaggistica</p>
         </div>
       </Link>
       <Link>
-        <div className='flex flex-col mr-10 text-center  hover:text-gray-900'>
+        <div className='flex flex-col mr-8 text-center  hover:text-gray-900'>
           <FontAwesomeIcon className='text-xl mb-1' icon={faBell} />
           <p className='text-xs'>Notifiche</p>
         </div>
       </Link>
-      <div className='flex flex-col mr-10 text-center  hover:text-gray-900 cursor-pointer'>
+      <div className='flex flex-col mr-8 text-center  hover:text-gray-900 cursor-pointer'>
         <img
           className='w-5 rounded-full text-sm'
           src={userData.image}

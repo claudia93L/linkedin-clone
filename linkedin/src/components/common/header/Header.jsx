@@ -5,8 +5,8 @@ import Navbar from './Navbar';
 
 const Header = () => {
   return (
-    <header className='bg-white w-full border-b border-gray-200'>
-      <div className='flex flex-row items-center justify-between h-16 px-28'>
+    <header className='bg-white w-full border-b border-gray-200 fixed top-0 z-10'>
+      <div className='flex flex-row items-center justify-between h-12 px-28'>
         <span className='flex flex-row items-center'>
           <Link to='/'>
             <img

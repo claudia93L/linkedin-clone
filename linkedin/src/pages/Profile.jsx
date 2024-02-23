@@ -1,13 +1,25 @@
-import Section from '../components/common/section/Section';
+import Section from '../components/common/Section';
+import ConnectionsSection from '../components/ConnectionsSection';
+import LanguageSection from '../components/LanguageSection';
 import ProfileSection from '../components/ProfileSection';
 
 const Profile = () => {
   return (
-    <>
-      <Section>
-        <ProfileSection></ProfileSection>
-      </Section>
-    </>
+    <div className='flex flex-row gap-5'>
+      <div className='w-3/4'>
+        <Section>
+          <ProfileSection></ProfileSection>
+        </Section>
+      </div>
+      <div className='w-1/4 flex flex-col gap-2'>
+        <Section>
+          <LanguageSection></LanguageSection>
+        </Section>
+        <Section>
+          <ConnectionsSection></ConnectionsSection>
+        </Section>
+      </div>
+    </div>
   );
 };
 

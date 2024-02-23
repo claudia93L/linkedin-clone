@@ -36,7 +36,7 @@ function App() {
     <>
       <Provider store={store}>
         <Header></Header>
-        <div className='px-32 bg-stone-100 py-6'>
+        <div className='px-32 bg-stone-100 py-6 mt-12'>
           <Routes>
             <Route path='/' element={<Homepage></Homepage>}></Route>
             <Route path='/profile' element={<Profile></Profile>}></Route>
