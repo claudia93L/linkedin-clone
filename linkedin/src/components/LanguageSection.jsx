@@ -27,8 +27,7 @@ const LanguageSection = () => {
             <FontAwesomeIcon className='text-gray-500' icon={faPencil} />
           </div>
           <p className='text-sm font-light text-gray-500'>
-            www.linkedin.com/in/{profile.name.toLowerCase()}-
-            {profile.surname.toLowerCase()}
+            www.linkedin.com/in/{profile.name}-{profile.surname}
           </p>
         </div>
       </div>
