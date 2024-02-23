@@ -10,8 +10,11 @@ import {
   faCaretDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const userData = useSelector((state) => state.user.user);
+
   return (
     <nav className='flex justify-evenly text-gray-500 items-center'>
       <Link to='/'>
@@ -45,8 +48,12 @@ const Navbar = () => {
         </div>
       </Link>
       <div className='flex flex-col mr-10 text-center  hover:text-gray-900 cursor-pointer'>
-        <img className='w-5 rounded-full text-sm' src='' alt='Profile image' />
-        <p className='text-xs'>
+        <img
+          className='w-5 rounded-full text-sm'
+          src={userData.image}
+          alt='Profile image'
+        />
+        <p className='text-xs mt-1'>
           Tu <FontAwesomeIcon icon={faCaretDown} />
         </p>
       </div>
