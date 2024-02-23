@@ -4,15 +4,19 @@ import Button from './common/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { setUsers } from '../reducers/usersReducer';
+import { setConnections } from '../reducers/userReducer';
+import { Link } from 'react-router-dom';
 
 const ConnectionsSection = () => {
   const dispatch = useDispatch();
   const profilesURL = 'http://striveschool-api.herokuapp.com/api/profile/';
   const apiKey =
     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ3NWE3Zjc2YTY0YjAwMTllZjFhZDQiLCJpYXQiOjE3MDg2MTIyMjMsImV4cCI6MTcwOTgyMTgyM30.PO5wrMuUFkxCnf42llGj-y6i4rZwTeeht1nzaqZ_CcM';
+
   const [lessUsers, setLessUsers] = useState([]);
 
   const users = useSelector((state) => state.users.users);
+  const connections = useSelector((state) => state.user.connections);
 
   const fetchUsers = async () => {
     try {
@@ -38,21 +42,21 @@ const ConnectionsSection = () => {
   }, []);
 
   useEffect(() => {
-    setLessUsers(reduceUsers(users));
-  }, [users]);
-
-  function reduceUsers(users) {
-    let lessUsers = users;
     if (users.length > 5) {
-      lessUsers = users.slice(0, 5);
+      setLessUsers(users.slice(0, 5));
+    } else {
+      setLessUsers(users);
     }
-
-    return lessUsers;
-  }
+  }, [users]);
 
   function showAll() {
     setLessUsers(users);
     return lessUsers;
+  }
+
+  function addConnection() {
+    const newConnections = connections + 1;
+    dispatch(setConnections(newConnections));
   }
 
   return (
@@ -63,26 +67,33 @@ const ConnectionsSection = () => {
         {lessUsers.map((user, index) => {
           return (
             <div
-              key={user.id}
+              key={user._id}
               className={`flex flex-row gap-3 mb-5 ${
                 index !== lessUsers.length - 1
                   ? 'border-b border-gray-300'
                   : null
               } `}
             >
+              <Link to={`/profile/${user._id}`}>
+                <div>
+                  <img
+                    src={user.image}
+                    alt='User profile image'
+                    className='w-10 rounded-full h-10'
+                  />
+                </div>
+              </Link>
               <div>
-                <img
-                  src={user.image}
-                  alt='User profile image'
-                  className='w-10 rounded-full'
-                />
-              </div>
-              <div>
-                <h3 className='font-semibold'>
-                  {user.name} {user.surname}
-                </h3>
-                <p className='mt-1 text-sm'>{user.title}</p>
-                <Button className='py-1 px-2 font-semibold rounded-full text-gray-500 border border-black hover:bg-gray-200 cursor-pointer w-32 text-center mb-5 mt-2'>
+                <Link to={`/profile/${user._id}`}>
+                  <h3 className='font-semibold'>
+                    {user.name} {user.surname}
+                  </h3>
+                  <p className='mt-1 text-sm'>{user.title}</p>{' '}
+                </Link>
+                <Button
+                  className='py-1 px-2 font-semibold rounded-full text-gray-500 border border-black hover:bg-gray-200 cursor-pointer w-32 text-center mb-5 mt-2 '
+                  onClick={addConnection}
+                >
                   <FontAwesomeIcon className='mr-2' icon={faUserPlus} />
                   Collegati
                 </Button>

@@ -40,6 +40,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Homepage></Homepage>}></Route>
             <Route path='/profile' element={<Profile></Profile>}></Route>
+            <Route path='/profile/:id' element={<Profile></Profile>}></Route>
           </Routes>
         </div>
       </Provider>
