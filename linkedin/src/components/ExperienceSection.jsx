@@ -110,33 +110,36 @@ const ExperienceSection = () => {
             >
               <FontAwesomeIcon className='text-gray-600' icon={faPlus} />
             </div>
-            <div className='hover:bg-gray-200 py-2 px-3 rounded-full text-gray-600'>
-              <FontAwesomeIcon className='text-gray-600' icon={faPencil} />
-            </div>
           </span>
         </div>
         {userExperiences.map((exp) => (
           <div
-            className='flex flex-row mb-5 text-gray-600 border-b border-gray-300'
+            className='flex flex-row mb-5 text-gray-600 border-b border-gray-300 justify-between'
             key={exp._id}
           >
-            <div className='mr-3'>
-              <img
-                className='w-14'
-                src='../../src/assets/logo-jobs.png'
-                alt={`${exp.company} logo`}
-              />
-            </div>
-            <div className='flex flex-col'>
-              <h3 className='font-semibold text-md'>{exp.role}</h3>
-              <h5>{exp.company}</h5>
-              <h6 className='font-thin text-sm flex items-center mt-1'>
-                {exp.startDate} - {exp.endDate}
-              </h6>
-              <h6 className='font-thin text-sm flex items-center mt-1'>
-                {exp.area}
-              </h6>
-              <p className='text-sm my-3'>{exp.description}</p>
+            <span className='flex flex-row'>
+              <div className='mr-3'>
+                <img
+                  className='w-14'
+                  src='../../src/assets/logo-jobs.png'
+                  alt={`${exp.company} logo`}
+                />
+              </div>
+              <div className='flex flex-col'>
+                <h3 className='font-semibold text-md'>{exp.role}</h3>
+                <h5>{exp.company}</h5>
+                <h6 className='font-thin text-sm flex items-center mt-1'>
+                  {exp.startDate} - {exp.endDate}
+                </h6>
+                <h6 className='font-thin text-sm flex items-center mt-1'>
+                  {exp.area}
+                </h6>
+                <p className='text-sm my-3'>{exp.description}</p>
+              </div>
+            </span>
+
+            <div className='hover:bg-gray-200 py-2 px-3 h-10 rounded-full text-gray-600 cursor-pointer'>
+              <FontAwesomeIcon className='text-gray-600' icon={faPencil} />
             </div>
           </div>
         ))}
