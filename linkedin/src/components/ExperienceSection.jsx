@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setExperiences } from '../reducers/userReducer';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Modal from './common/modal/Modal';
 import { useState } from 'react';
 
@@ -17,13 +17,23 @@ const ExperienceSection = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const jobTitle = useRef();
+  const startDate = useRef();
+  const endDate = useRef();
+  const description = useRef();
+  const company = useRef();
+  const area = useRef();
+
   const fetchUserExperiences = async () => {
     try {
-      let res = await fetch(profileBaseUrl + userData._id + '/experiences', {
-        headers: {
-          Authorization: apiKey,
-        },
-      });
+      let res = await fetch(
+        profileBaseUrl + '/' + userData._id + '/experiences',
+        {
+          headers: {
+            Authorization: apiKey,
+          },
+        }
+      );
 
       if (res.ok) {
         let data = await res.json();
@@ -37,13 +47,56 @@ const ExperienceSection = () => {
   };
 
   useEffect(() => {
-    fetchUserExperiences();
-  }, []);
+    if (userData && userData._id) {
+      fetchUserExperiences();
+    }
+  }, [userData]);
 
   const openModal = () => {
-    console.log('Modal opened');
     setIsModalOpen(true);
   };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const addJobExperience = async (newJobData) => {
+    try {
+      let res = await fetch(
+        profileBaseUrl + '/' + userData._id + '/experiences',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: apiKey,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newJobData),
+        }
+      );
+      if (res.ok) {
+        let data = await res.json();
+        dispatch(setExperiences([...userExperiences, data]));
+        closeModal();
+      } else {
+        console.error('Errore nella richiesta API:', res.status);
+      }
+    } catch (err) {
+      console.error('Si è verificato un errore:', err);
+    }
+  };
+
+  function addExperience() {
+    const newJobData = {
+      role: jobTitle.current.value,
+      startDate: startDate.current.value,
+      endDate: endDate.current.value !== '' ? endDate.current.value : null,
+      description: description.current.value,
+      company: company.current.value,
+      area: area.current.value,
+    };
+
+    addJobExperience(newJobData);
+  }
 
   return (
     <div className='my-3 mx-4'>
@@ -62,29 +115,32 @@ const ExperienceSection = () => {
             </div>
           </span>
         </div>
-        <div className='flex flex-row gap-2'>
-          <div>
-            <img
-              className='w-20'
-              src={userExperiences.image}
-              alt={`${userExperiences.company} logo`}
-            />
+        {userExperiences.map((exp) => (
+          <div className='flex flex-row gap-2' key={exp._id}>
+            <div>
+              <img
+                className='w-20'
+                src={exp.image}
+                alt={`${exp.company} logo`}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <h3 className='font-semibold text-md'>{exp.role}</h3>
+              <h5>{exp.company}</h5>
+              <h6 className='font-thin text-sm flex items-center mt-1'>
+                {exp.startDate} - {exp.endDate}
+              </h6>
+              <h6 className='font-thin text-sm flex items-center mt-1'>
+                {exp.area}
+              </h6>
+              <p className='text-sm my-3'>{exp.description}</p>
+            </div>
           </div>
-          <div className='flex flex-col'>
-            <h3 className='font-semibold text-md'>{userExperiences.role}</h3>
-            <h5>{userExperiences.company}</h5>
-            <h6 className='font-thin text-sm flex items-center mt-1'>
-              {userExperiences.startDate} - {userExperiences.endDate}
-            </h6>
-            <h6 className='font-thin text-sm flex items-center mt-1'>
-              {userExperiences.area}
-            </h6>
-            <p className='text-sm my-3'>{userExperiences.description}</p>
-          </div>
-        </div>
+        ))}
       </div>
       {isModalOpen && (
         <Modal
+          addExperience={addExperience}
           open={open}
           onClose={() => setIsModalOpen(false)}
           title='Aggiungi Esperienza'
@@ -96,6 +152,7 @@ const ExperienceSection = () => {
             <span className='flex flex-col gap-1'>
               <label htmlFor='jobTitle'>Qualifica*</label>
               <input
+                ref={jobTitle}
                 required
                 className='rounded bg-slate-100 h-9 text-sm px-2 py-1'
                 type='text'
@@ -107,6 +164,7 @@ const ExperienceSection = () => {
               <label htmlFor='company'>Nome azienda*</label>
               <input
                 required
+                ref={company}
                 className='rounded bg-slate-100 h-9 text-sm px-2 py-1'
                 type='text'
                 name='company'
@@ -114,8 +172,10 @@ const ExperienceSection = () => {
               />
             </span>
             <span className='flex flex-col gap-1'>
-              <label htmlFor='area'>Località</label>
+              <label htmlFor='area'>Località*</label>
               <input
+                required
+                ref={area}
                 className='rounded bg-slate-100 h-9 text-sm px-2 py-1'
                 type='text'
                 name='area'
@@ -131,6 +191,7 @@ const ExperienceSection = () => {
             <span className='flex flex-col gap-1'>
               <label htmlFor='startDate'>Data di inizio*</label>
               <input
+                ref={startDate}
                 required
                 className='rounded bg-slate-100 h-9 text-sm px-2 py-1'
                 type='date'
@@ -141,6 +202,7 @@ const ExperienceSection = () => {
             <span className='flex flex-col gap-1'>
               <label htmlFor='endDate'>Data di fine</label>
               <input
+                ref={endDate}
                 className='rounded bg-slate-100 h-9 text-sm px-2 py-1'
                 type='date'
                 name='endDate'
@@ -148,8 +210,10 @@ const ExperienceSection = () => {
               />
             </span>
             <span className='flex flex-col'>
-              <label htmlFor='description'>Descrizione</label>
+              <label htmlFor='description'>Descrizione*</label>
               <textarea
+                required
+                ref={description}
                 name='description'
                 id='description'
                 cols='30'

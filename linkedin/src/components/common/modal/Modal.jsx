@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 
-const Modal = ({ open, onClose, children, title }) => {
+const Modal = ({ open, onClose, children, title, addExperience }) => {
   return (
     <div
       onClick={onClose}
@@ -19,7 +19,7 @@ const Modal = ({ open, onClose, children, title }) => {
         <div className='flex flex-row justify-between items-center border-b border-gray-200 py-2 px-6'>
           <h1>{title}</h1>
           <button
-            className=' p-1 rounded-lg text-gray-400 hover:bg.gray-50 hover: text-gray-600'
+            className=' p-1 rounded-lg text-gray-400 hover:bg.gray-50 hover:text-gray-600'
             onClick={onClose}
           >
             <FontAwesomeIcon icon={faXmark}></FontAwesomeIcon>
@@ -29,7 +29,10 @@ const Modal = ({ open, onClose, children, title }) => {
           {children}
         </div>
         <div className='flex flex-row justify-end border-t border-gray-200 px-6 py-3'>
-          <Button className='bg-blue-600 py-1 px-4 text-white font-semibold rounded-full hover:bg-blue-800 cursor-pointer'>
+          <Button
+            onClick={addExperience}
+            className='bg-blue-600 py-1 px-4 text-white font-semibold rounded-full hover:bg-blue-800 cursor-pointer'
+          >
             Save
           </Button>
         </div>
