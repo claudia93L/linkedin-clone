@@ -20,7 +20,7 @@ const Card = ({ ...props }) => {
     >
       <span className='flex flex-row justify-between items-center'>
         <p className='font-semibold'>{props.title}</p>
-        <div className='hover:bg-gray-300 py-1 px-2 rounded-full text-gray-500'>
+        <div className='hover:bg-gray-200 py-1 px-2 rounded-full text-gray-500'>
           <FontAwesomeIcon icon={checkTitle(props.title)} />
         </div>
       </span>
