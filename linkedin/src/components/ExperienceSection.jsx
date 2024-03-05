@@ -101,26 +101,29 @@ const ExperienceSection = () => {
   return (
     <div className='my-3 mx-4'>
       <div className='flex flex-col'>
-        <div className='flex flex-row justify-between cursor-pointer items-center text-lg'>
+        <div className='flex flex-row justify-between cursor-pointer items-center text-lg mb-5'>
           <h1 className='font-semibold'>Esperienza</h1>
           <span className='text-xl flex gap-3'>
             <div
               className='hover:bg-gray-200 py-2 px-3 rounded-full text-gray-500'
               onClick={openModal}
             >
-              <FontAwesomeIcon className='text-gray-500' icon={faPlus} />
+              <FontAwesomeIcon className='text-gray-600' icon={faPlus} />
             </div>
-            <div className='hover:bg-gray-200 py-2 px-3 rounded-full text-gray-500'>
-              <FontAwesomeIcon className='text-gray-500' icon={faPencil} />
+            <div className='hover:bg-gray-200 py-2 px-3 rounded-full text-gray-600'>
+              <FontAwesomeIcon className='text-gray-600' icon={faPencil} />
             </div>
           </span>
         </div>
         {userExperiences.map((exp) => (
-          <div className='flex flex-row gap-2' key={exp._id}>
-            <div>
+          <div
+            className='flex flex-row mb-5 text-gray-600 border-b border-gray-300'
+            key={exp._id}
+          >
+            <div className='mr-3'>
               <img
-                className='w-20'
-                src={exp.image}
+                className='w-14'
+                src='../../src/assets/logo-jobs.png'
                 alt={`${exp.company} logo`}
               />
             </div>
@@ -145,7 +148,7 @@ const ExperienceSection = () => {
           onClose={() => setIsModalOpen(false)}
           title='Aggiungi Esperienza'
         >
-          <p className='mb-5 text-xs text-gray-500'>
+          <p className='mb-5 text-xs text-gray-600'>
             * indica che è obbligatorio
           </p>
           <form className='flex flex-col mx-auto w-full gap-4'>
